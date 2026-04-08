@@ -1,4 +1,14 @@
 <x-movie-layout title="Quản lý phim">
+    <div class="container-fluid mt-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-dark text-white">
+                <h3 class="mb-0 text-center text-uppercase">Danh Sách Phim</h3>
+            </div>
+            <div class="card-body bg-light">    
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <a href="{{ url('/movie/create') }}" class="btn btn-success">
+                        <i class="fa fa-plus"></i> Thêm phim mới
+                    </a>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
 
     <style>
