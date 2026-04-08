@@ -6,9 +6,9 @@
             </div>
             <div class="card-body bg-light">    
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <button class="btn btn-success">
+                    <a href="{{ url('/movie/create') }}" class="btn btn-success">
                         <i class="fa fa-plus"></i> Thêm phim mới
-                    </button>
+                    </a>
                 </div>
 
                 <table id="id-table" class="table table-bordered table-striped bg-white w-100">
