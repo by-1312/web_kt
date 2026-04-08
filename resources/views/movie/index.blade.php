@@ -7,9 +7,9 @@
         @foreach($movies as $movie)
             <div class="movie" style="background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 1px solid #e3e3e3;">
                 <a href="{{ url('/movie/' . $movie->id) }}">
-                    <img src="{{ asset('storage/' . $movie->image) }}" 
-                         alt="{{ $movie->movie_name_vn }}" 
-                         style="width: 100%; height: 280px; object-fit: cover; display: block;">
+                    <img src="{{ $movie->image_link }}" 
+                    alt="{{ $movie->movie_name_vn }}" 
+                    style="width: 100%; height: 280px; object-fit: cover; display: block;">
                 </a>
 
                 <div class="movie-info" style="padding: 10px; text-align: center; display: block !important;">
