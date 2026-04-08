@@ -4,7 +4,7 @@
             <div class="card-header bg-dark text-white">
                 <h3 class="mb-0 text-center text-uppercase">Danh Sách Phim</h3>
             </div>
-            <div class="card-body bg-light">
+            <div class="card-body bg-light">    
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <button class="btn btn-success">
                         <i class="fa fa-plus"></i> Thêm phim mới

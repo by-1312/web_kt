@@ -11,9 +11,8 @@ Route::get('/the-loai/{id}', [App\Http\Controllers\MovieController::class, 'getM
 Route::get('/movie/{id}', [App\Http\Controllers\MovieController::class, 'detail'])->name('movie.detail');
 
 /* quang */
-// Vào trang quản lý chính
 Route::get('/movie_manager', [MovieController2::class, 'index']);
 
-// Bỏ chữ admin ở các route phụ
-Route::get('/movies/{id}', [MovieController2::class, 'show']);
-Route::delete('/movies/{id}', [MovieController2::class, 'destroy']);
+// Các route phụ trợ
+Route::get('/admin/movies/{id}', [MovieController2::class, 'show']);
+Route::delete('/admin/movies/{id}', [MovieController2::class, 'destroy']);
