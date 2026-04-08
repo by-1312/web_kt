@@ -45,6 +45,7 @@ class MovieController1 extends Controller
         }
         DB::table('movie')->insert([
             'movie_name'    => $request->movie_name,
+            'original_name' => $request->movie_name,
             'movie_name_vn' => $request->movie_name_vn,
             'release_date'  => $request->release_date,
             'overview'      => $request->overview,
