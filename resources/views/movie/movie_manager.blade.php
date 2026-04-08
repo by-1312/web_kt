@@ -1,14 +1,4 @@
 <x-movie-layout title="Quản lý phim">
-    <div class="container-fluid mt-4">
-        <div class="card shadow-sm">
-            <div class="card-header bg-dark text-white">
-                <h3 class="mb-0 text-center text-uppercase">Danh Sách Phim</h3>
-            </div>
-            <div class="card-body bg-light">    
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <a href="{{ url('/movie/create') }}" class="btn btn-success">
-                        <i class="fa fa-plus"></i> Thêm phim mới
-                    </a>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
 
     <style>
@@ -26,7 +16,6 @@
         .btn-group-custom { display: flex; justify-content: center; align-items: center; }
         .container-main { padding: 20px; }
         
-        /* Tinh chỉnh để khớp với ảnh bạn gửi */
         .dataTables_wrapper .dataTables_paginate .paginate_button.current {
             background: #007bff !important;
             color: white !important;
@@ -40,7 +29,9 @@
         <div class="card shadow-sm border-0">
             <div class="card-body bg-white">
                 <div class="mb-3">
-                    <button class="btn btn-success btn-sm px-3">Thêm</button>
+                    <a href="{{ url('/movie/create') }}" class="btn btn-success btn-sm px-3">
+                        <i class="fa fa-plus"></i> Thêm
+                    </a>
                 </div>
 
                 <table id="id-table" class="table table-bordered table-hover w-100">
@@ -89,7 +80,6 @@
 
     <script>
         $(document).ready(function() {
-            // Kiểm tra xem table có tồn tại không trước khi gọi
             if ( ! $.fn.DataTable.isDataTable( '#id-table' ) ) {
                 $('#id-table').DataTable({
                     "responsive": true,
