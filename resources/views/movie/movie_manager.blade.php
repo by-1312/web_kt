@@ -9,62 +9,69 @@
                     <a href="{{ url('/movie/create') }}" class="btn btn-success">
                         <i class="fa fa-plus"></i> Thêm phim mới
                     </a>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
+
+    <style>
+        .page-title { 
+            text-align: center; font-size: 32px; font-weight: bold; 
+            margin: 25px 0; color: #333; text-transform: uppercase; 
+        }
+        #id-table thead th { 
+            background-color: #fff !important; color: #000 !important; 
+            border-bottom: 2px solid #dee2e6 !important; text-align: center;
+            vertical-align: middle;
+        }
+        .btn-view { background-color: #007bff; color: white !important; border: none; padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 13px; margin-right: 5px;}
+        .btn-delete { background-color: #dc3545; color: white !important; border: none; padding: 5px 12px; border-radius: 4px; font-size: 13px; }
+        .btn-group-custom { display: flex; justify-content: center; align-items: center; }
+        .container-main { padding: 20px; }
+        
+        /* Tinh chỉnh để khớp với ảnh bạn gửi */
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: #007bff !important;
+            color: white !important;
+            border: 1px solid #007bff !important;
+        }
+    </style>
+
+    <div class="container-main">
+        <h2 class="page-title">Danh Sách Phim</h2>
+        
+        <div class="card shadow-sm border-0">
+            <div class="card-body bg-white">
+                <div class="mb-3">
+                    <button class="btn btn-success btn-sm px-3">Thêm</button>
                 </div>
 
-                <table id="id-table" class="table table-bordered table-striped bg-white w-100">
-                    <thead class="thead-dark">
-                        <tr class="text-center">
-                            <th>Ảnh đại diện</th>
+                <table id="id-table" class="table table-bordered table-hover w-100">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">Ảnh đại diện</th>
                             <th>Tiêu đề</th>
                             <th>Giới thiệu</th>
-                            <th>Ngày phát hành</th>
-                            <th>Điểm đánh giá</th>
-                            <th>Thao tác</th>
+                            <th style="width: 120px;">Ngày phát hành</th>
+                            <th style="width: 100px;">Điểm đánh giá</th>
+                            <th style="width: 150px;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($movies as $item)
                         <tr>
                             <td class="text-center">
-                                {{-- Kiểm tra và hiển thị ảnh từ cột 'image' --}}
-                                @if($item->image)
-                                    <img src="{{ $item->image_link }}" width="60" class="rounded shadow-sm" alt="poster">
-@elseif($item->image)
-                                    <span class="text-muted">No Image</span>
-                                @endif
+                                <img src="{{ $item->image_link ?? asset('images/'.$item->image) }}" width="75" class="shadow-sm">
                             </td>
-                            <td>
-                                {{-- Hiển thị tên phim Việt hóa hoặc tên gốc --}}
-                                <strong>{{ $item->movie_name_vn ?? $item->movie_name }}</strong>
-                                <br>
-                                <small class="text-secondary italic">{{ $item->original_name }}</small>
+                            <td class="align-middle font-weight-bold">{{ $item->movie_name_vn }}</td>
+                            <td class="small text-muted align-middle">
+                                {{ \Illuminate\Support\Str::limit($item->overview_vn, 100) }}
                             </td>
-                            <td>
-                                {{-- Hiển thị tóm tắt nội dung từ cột 'overview_vn' --}}
-                                {{ \Illuminate\Support\Str::limit($item->overview_vn, 60) }}
-                            </td>
-                            <td class="text-center">
-                                {{-- Cột 'release_date' --}}
-                                {{ $item->release_date }}
-                            </td>
-                            <td class="text-center">
-                                {{-- Cột 'vote_average' đại diện cho điểm đánh giá --}}
-                                <span class="badge badge-info py-2 px-2">{{ number_format($item->vote_average, 1) }}</span>
-                            </td>
-                            <td class="text-center">
-                                <div class="btn-group" role="group">
-                                    {{-- Nút Xem chi tiết --}}
-                                    <a href="{{ url('/admin/movies/'.$item->id) }}" class="btn btn-primary btn-sm mx-1">
-                                        <i class="fa fa-eye"></i> Xem
-                                    </a>
-                                    
-                                    {{-- Nút Xóa (Sử dụng phương thức DELETE cho xóa mềm) --}}
-                                    <form action="{{ url('/admin/movies/'.$item->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa bộ phim này?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm mx-1">
-                                            <i class="fa fa-trash"></i> Xóa
-                                        </button>
+                            <td class="text-center align-middle">{{ $item->release_date }}</td>
+                            <td class="text-center align-middle font-weight-bold">{{ $item->vote_average }}</td>
+                            <td class="align-middle">
+                                <div class="btn-group-custom">
+                                    <a href="{{ url('/movies/'.$item->id) }}" class="btn-view">Xem</a>
+                                    <form action="{{ url('/movies/'.$item->id) }}" method="POST" onsubmit="return confirm('Xóa?')">
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="btn-delete">Xóa</button>
                                     </form>
                                 </div>
                             </td>
@@ -76,17 +83,33 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+
     <script>
         $(document).ready(function() {
-            $('#id-table').DataTable({
-                responsive: true,
-                pageLength: 5,
-                lengthMenu: [5, 10, 25, 50, 100],
-                bStateSave: true,
-                language: {
-                    url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
-                }
-            });
+            // Kiểm tra xem table có tồn tại không trước khi gọi
+            if ( ! $.fn.DataTable.isDataTable( '#id-table' ) ) {
+                $('#id-table').DataTable({
+                    "responsive": true,
+                    "pageLength": 5,
+                    "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Tất cả"]],
+                    "bStateSave": true,
+                    "order": [], 
+                    "language": {
+                        "search": "Search:",
+                        "lengthMenu": "_MENU_ entries per page",
+                        "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                        "paginate": {
+                            "first": "«",
+                            "last": "»",
+                            "next": "›",
+                            "previous": "‹"
+                        }
+                    }
+                });
+            }
         });
     </script>
 </x-movie-layout>
