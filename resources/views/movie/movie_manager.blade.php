@@ -76,7 +76,6 @@
         </div>
     </div>
 
-    {{-- Script kích hoạt DataTable theo yêu cầu --}}
     <script>
         $(document).ready(function() {
             $('#id-table').DataTable({

@@ -8,8 +8,6 @@
             <h5 style="color: #004085; font-weight: bold; margin-bottom: 20px;">THÊM PHIM</h5>
         </div>
     </div>
-
-    {{-- Hiển thị thông báo lỗi Validation --}}
     @if ($errors->any())
         <div class="alert alert-danger" style="border-radius: 5px; margin-bottom: 20px;">
             <ul class="mb-0">

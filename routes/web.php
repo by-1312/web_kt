@@ -13,7 +13,7 @@ Route::get('/the-loai/{id}', [App\Http\Controllers\MovieController::class, 'getM
 Route::get('/movie/create', [MovieController1::class, 'create']);
 Route::get('/movie/{id}', [App\Http\Controllers\MovieController::class, 'detail'])->name('movie.detail');
 
-/* quang */
+
 Route::get('/movie_manager', [MovieController2::class, 'index']);
 
 

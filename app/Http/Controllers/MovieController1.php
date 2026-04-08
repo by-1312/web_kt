@@ -38,7 +38,6 @@ class MovieController1 extends Controller
             'overview'      => 'Mô tả',
             'image'         => 'Ảnh đại diện',
         ]);
-
         $imageName = null;
         if ($request->hasFile('image')) {
             $imageName = $request->file('image')->getClientOriginalName();
