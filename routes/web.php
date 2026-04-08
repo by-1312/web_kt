@@ -17,3 +17,4 @@ Route::get('/movie_manager', [MovieController2::class, 'index']);
 // Bỏ chữ admin ở các route phụ
 Route::get('/movies/{id}', [MovieController2::class, 'show']);
 Route::delete('/movies/{id}', [MovieController2::class, 'destroy']);
+Route::post('/timkiem', [MovieController::class, 'search']);
